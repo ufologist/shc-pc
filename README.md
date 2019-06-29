@@ -21,11 +21,14 @@
 
 ## 功能
 
+扩展 [StandardHttpClient](https://github.com/ufologist/standard-http-client)
 * 发送请求时开启 loading
 * 请求结束后关闭 loading
 * 请求出错时给予用户错误提示
 
 ![http-error-tip](https://user-images.githubusercontent.com/167221/60382439-a2952a00-9a95-11e9-868a-1e67d1bd0d34.png)
+
+使用方法见 [StandardHttpClient](https://github.com/ufologist/standard-http-client)
 
 ## 扩展
 
