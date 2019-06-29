@@ -25,7 +25,7 @@
 * 请求结束后关闭 loading
 * 请求出错时给予用户错误提示
 
-![http-error-tip](https://user-images.githubusercontent.com/167221/60382212-9065bc80-9a92-11e9-9942-1ca0c0baea43.png)
+![http-error-tip](https://user-images.githubusercontent.com/167221/60382439-a2952a00-9a95-11e9-868a-1e67d1bd0d34.png)
 
 ## 扩展
 
