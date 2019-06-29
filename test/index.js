@@ -1,4 +1,4 @@
-import HttpClient from '../src/shc-pc.js';
+import HttpClient from '../dist/shc-pc.esm.js';
 
 var httpClient = new HttpClient();
 

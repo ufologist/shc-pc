@@ -62,3 +62,4 @@ typings/
 
 # Optional parcel cache directory
 .cache
+dist-test
