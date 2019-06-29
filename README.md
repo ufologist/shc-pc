@@ -28,7 +28,21 @@
 
 ![http-error-tip](https://user-images.githubusercontent.com/167221/60382439-a2952a00-9a95-11e9-868a-1e67d1bd0d34.png)
 
-使用方法见 [StandardHttpClient](https://github.com/ufologist/standard-http-client)
+## 示例
+
+```javascript
+import HttpClient from 'shc-pc';
+
+var httpClient = new HttpClient();
+
+httpClient.send({
+    url: 'https://httpbin.org/json'
+}).then(function([data, response]) {
+    console.log('data', data);
+});
+```
+
+更多使用方法详见 [StandardHttpClient](https://github.com/ufologist/standard-http-client)
 
 ## 扩展
 
