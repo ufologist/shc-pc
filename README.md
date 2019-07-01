@@ -22,7 +22,7 @@
 ## 功能
 
 扩展 [StandardHttpClient](https://github.com/ufologist/standard-http-client)
-* 发送请求时开启 loading
+* 发送请求前开启 loading
 * 请求结束后关闭 loading
 * 请求出错时给予用户错误提示
 
