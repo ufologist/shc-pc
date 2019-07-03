@@ -36,46 +36,26 @@ class HttpClient extends StandardHttpClient {
     constructor(config) {
         super(config);
     }
-    useInterceptors() {
-        super.useInterceptors();
 
-        this.agent.interceptors.request.use(function(config) {
-            NProgress.start();
-            return config;
-        });
-
-        this.agent.interceptors.response.use(function(response) {
-            NProgress.done();
-            return response;
-        }, (error) => {
-            NProgress.done();
-            this.showErrorTip(error);
-            return Promise.reject(error);
-        });
+    beforeSend(config) {
+        NProgress.start();
     }
 
-    /**
-     * 显示错误提示
-     * 
-     * @param {AxiosError} error
-     */
-    showErrorTip(error) {
-        var errorCode = `${error._errorType}${error._errorCode}`;
+    afterSend(responseOrError) {
+        NProgress.done();
+    }
+
+    handleError(error) {
         if (error._errorType === 'A') {
-            showErrorTip(error._desc, errorCode, error.message + ' ' + error.config.url);
+            showErrorTip(error._desc, error._errorCode, error.message + ' ' + error.config.url);
         } else if (error._errorType === 'H') {
-            showErrorTip(error._desc, errorCode, error.config.url);
+            showErrorTip(error._desc, error._errorCode, error.config.url);
         } else if (error._errorType === 'B') {
-            var result = error.response.data;
-            var message = error._desc;
-            if (result && result.statusInfo && result.statusInfo.message) {
-                message = result.statusInfo.message;
-            }
-            showErrorTip(message, errorCode, error.config.url);
+            showErrorTip(error.message, error._errorCode, error.config.url);
         } else if (error._errorType === 'C') {
-            showErrorTip(error._desc, errorCode, error.message);
+            showErrorTip(error._desc, error._errorCode, error.message);
         } else {
-            showErrorTip(error._desc, errorCode, error.message);
+            showErrorTip(error._desc, error._errorCode, error.message);
         }
     }
 }

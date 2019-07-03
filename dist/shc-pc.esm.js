@@ -73,36 +73,6 @@ function _possibleConstructorReturn(self, call) {
   return _assertThisInitialized(self);
 }
 
-function _superPropBase(object, property) {
-  while (!Object.prototype.hasOwnProperty.call(object, property)) {
-    object = _getPrototypeOf(object);
-    if (object === null) break;
-  }
-
-  return object;
-}
-
-function _get(target, property, receiver) {
-  if (typeof Reflect !== "undefined" && Reflect.get) {
-    _get = Reflect.get;
-  } else {
-    _get = function _get(target, property, receiver) {
-      var base = _superPropBase(target, property);
-
-      if (!base) return;
-      var desc = Object.getOwnPropertyDescriptor(base, property);
-
-      if (desc.get) {
-        return desc.get.call(receiver);
-      }
-
-      return desc.value;
-    };
-  }
-
-  return _get(target, property, receiver || target);
-}
-
 /**
  * 显示错误提示
  * 
@@ -111,7 +81,7 @@ function _get(target, property, receiver) {
  * @param {string} tip 
  */
 
-function _showErrorTip(message, errorCode, tip) {
+function showErrorTip(message, errorCode, tip) {
   Message({
     dangerouslyUseHTMLString: true,
     message: "".concat(message, "<span title=\"").concat(tip, "\" style=\"cursor:help;font-size:12px;color:#aaa;\">(\u9519\u8BEF\u7801:").concat(errorCode, ")</span>"),
@@ -141,55 +111,28 @@ function (_StandardHttpClient) {
   }
 
   _createClass(HttpClient, [{
-    key: "useInterceptors",
-    value: function useInterceptors() {
-      var _this = this;
-
-      _get(_getPrototypeOf(HttpClient.prototype), "useInterceptors", this).call(this);
-
-      this.agent.interceptors.request.use(function (config) {
-        NProgress.start();
-        return config;
-      });
-      this.agent.interceptors.response.use(function (response) {
-        NProgress.done();
-        return response;
-      }, function (error) {
-        NProgress.done();
-
-        _this.showErrorTip(error);
-
-        return Promise.reject(error);
-      });
+    key: "beforeSend",
+    value: function beforeSend(config) {
+      NProgress.start();
     }
-    /**
-     * 显示错误提示
-     * 
-     * @param {AxiosError} error
-     */
-
   }, {
-    key: "showErrorTip",
-    value: function showErrorTip(error) {
-      var errorCode = "".concat(error._errorType).concat(error._errorCode);
-
+    key: "afterSend",
+    value: function afterSend(responseOrError) {
+      NProgress.done();
+    }
+  }, {
+    key: "handleError",
+    value: function handleError(error) {
       if (error._errorType === 'A') {
-        _showErrorTip(error._desc, errorCode, error.message + ' ' + error.config.url);
+        showErrorTip(error._desc, error._errorCode, error.message + ' ' + error.config.url);
       } else if (error._errorType === 'H') {
-        _showErrorTip(error._desc, errorCode, error.config.url);
+        showErrorTip(error._desc, error._errorCode, error.config.url);
       } else if (error._errorType === 'B') {
-        var result = error.response.data;
-        var message = error._desc;
-
-        if (result && result.statusInfo && result.statusInfo.message) {
-          message = result.statusInfo.message;
-        }
-
-        _showErrorTip(message, errorCode, error.config.url);
+        showErrorTip(error.message, error._errorCode, error.config.url);
       } else if (error._errorType === 'C') {
-        _showErrorTip(error._desc, errorCode, error.message);
+        showErrorTip(error._desc, error._errorCode, error.message);
       } else {
-        _showErrorTip(error._desc, errorCode, error.message);
+        showErrorTip(error._desc, error._errorCode, error.message);
       }
     }
   }]);
