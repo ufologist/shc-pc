@@ -46,4 +46,4 @@ httpClient.send({
 
 ## 扩展
 
-* 如果需要自定义错误提示, 可以继承之后重写 `showErrorTip` 方法
+* 如果需要自定义错误提示, 可以继承之后重写 `handleError` 方法
