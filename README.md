@@ -22,9 +22,9 @@
 ## 功能
 
 扩展 [StandardHttpClient](https://github.com/ufologist/standard-http-client)
-* 发送请求前开启 loading
+* 发送请求前开启 loading(通过 `nprogress` 实现)
 * 请求结束后关闭 loading
-* 请求出错时给予用户错误提示
+* 请求出错时给予用户错误提示(通过 `element-ui` 的 `Message` 实现)
 
 ![http-api-error-tip](https://user-images.githubusercontent.com/167221/60412703-bf03a480-9c04-11e9-8aa6-1b4272b39a94.png)
 
