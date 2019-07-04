@@ -7,6 +7,7 @@ var NProgress = _interopDefault(require('nprogress'));
 require('nprogress/nprogress.css');
 var elementUi = require('element-ui');
 require('element-ui/lib/theme-chalk/message.css');
+require('element-ui/lib/theme-chalk/icon.css');
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {

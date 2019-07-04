@@ -7,6 +7,7 @@ import {
     Message
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/message.css';
+import 'element-ui/lib/theme-chalk/icon.css';
 
 /**
  * 显示错误提示
