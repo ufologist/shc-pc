@@ -47,3 +47,28 @@ httpClient.send({
 ## 扩展
 
 * 如果需要自定义错误提示, 可以继承之后重写 `handleError` 方法
+
+  ```javascript
+  import SHC from 'shc-pc';
+  
+  class HttpClient extends SHC {
+      constructor() {
+          super({ // 可以在这里传入默认参数
+              withCredentials: true,
+              timeout: 10 * 1000
+          });
+      }
+  
+      handleError(error) {
+          super.handleError(error);
+  
+          if (error._errorCode === 'B1') {
+              alert('特殊处理业务错误 B1');
+          } else if (error._errorCode === 'B2') {
+              alert('特殊处理业务错误 B2');
+          }
+      }
+  }
+  
+  export default new HttpClient();
+  ```
