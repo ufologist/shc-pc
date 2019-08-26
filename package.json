@@ -1,6 +1,6 @@
 {
   "name": "shc-pc",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "符合接口规范的 HTTP 客户端 - PC",
   "main": "dist/shc-pc.common.js",
   "module": "dist/shc-pc.esm.js",
