@@ -1,5 +1,9 @@
 # CHANGELOG
 
+* v0.0.5 2019-8-26
+
+  * fix: 升级 `standard-http-client@0.0.4`, 解决使用 `_data` 时, 如果要编码的数据包含 `%` 就会报错
+
 * v0.0.4 2019-7-4
 
   * 升级 `standard-http-client` 模块到 `0.0.3` 版本
