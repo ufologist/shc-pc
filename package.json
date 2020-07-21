@@ -1,6 +1,6 @@
 {
   "name": "shc-pc",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "符合接口规范的 HTTP 客户端 - PC",
   "main": "dist/shc-pc.common.js",
   "module": "dist/shc-pc.esm.js",
@@ -25,7 +25,7 @@
   "dependencies": {
     "element-ui": "^2.10.0",
     "nprogress": "^0.2.0",
-    "standard-http-client": "0.0.4",
+    "standard-http-client": "0.0.5",
     "vue": "^2.6.10"
   },
   "devDependencies": {
