@@ -1,13 +1,22 @@
 {
   "name": "shc-pc",
-  "version": "0.0.6",
+  "version": "1.0.0-beta.0",
   "description": "符合接口规范的 HTTP 客户端 - PC",
-  "main": "dist/shc-pc.common.js",
-  "module": "dist/shc-pc.esm.js",
+  "main": "dist/commonjs/shc-pc.js",
+  "module": "dist/esm/shc-pc.js",
   "scripts": {
     "start": "parcel test/index.html --out-dir dist-test",
-    "build": "rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "clean": "del-cli dist -f",
+    "build": "npm run clean && npm run build:commonjs && npm run build:esm",
+    "build:commonjs": "tsc --module CommonJS --outDir dist/commonjs",
+    "build:esm": "tsc --module ES2015 --outDir dist/esm",
+    "prepublishOnly": "npm run build",
+    "minor:beta": "release-it minor --preRelease=beta",
+    "patch:beta": "release-it patch --preRelease=beta",
+    "release:beta": "release-it --preRelease",
+    "minor": "release-it minor",
+    "patch": "release-it patch"
   },
   "repository": {
     "type": "git",
@@ -22,20 +31,23 @@
     "url": "https://github.com/ufologist/shc-pc/issues"
   },
   "homepage": "https://github.com/ufologist/shc-pc#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "element-ui": "^2.10.0",
     "nprogress": "^0.2.0",
-    "standard-http-client": "0.0.5",
-    "vue": "^2.6.10"
+    "standard-http-client": "^1.0.1",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
     "babel-jest": "^24.8.0",
     "coveralls": "^3.0.4",
+    "del-cli": "^4.0.1",
     "jest": "^24.8.0",
-    "parcel-bundler": "^1.12.3",
-    "rollup": "^1.16.3",
-    "rollup-plugin-babel": "^4.3.3"
+    "parcel-bundler": "^1.12.5",
+    "release-it": "^14.11.5",
+    "typescript": "^4.4.3",
+    "vue": "^2.6.14"
   }
 }

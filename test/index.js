@@ -1,4 +1,4 @@
-import HttpClient from '../dist/shc-pc.esm.js';
+import HttpClient from '../dist/esm/shc-pc.js';
 
 var httpClient = new HttpClient();
 
@@ -15,7 +15,7 @@ httpClient.send({ // H
     url: 'https://httpbin.org/status/404'
 });
 httpClient.send({ // B
-    url: 'https://www.easy-mock.com/mock/5ab4a58474cb3a49038187dc/example/shc-status-1'
+    url: 'http://yapi.smart-xwork.cn/mock/82892/example/shc-status-1'
 });
 httpClient.send({ // C
     url: 'https://httpbin.org/status/200',

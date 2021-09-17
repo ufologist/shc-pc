@@ -1,5 +1,10 @@
 # CHANGELOG
 
+* v1.0.0 2021-9-17
+
+  * feat: 升级 `standard-http-client@1.0.0`
+  * refactor: 重构为 TS
+
 * v0.0.6 2020-7-21
 
   * fix: 升级 `standard-http-client@0.0.5`

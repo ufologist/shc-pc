@@ -1,22 +1,27 @@
-import StandardHttpClient from 'standard-http-client';
+import StandardHttpClient, {
+    RequestError
+} from 'standard-http-client';
 
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-import {
-    Message
-} from 'element-ui';
+import Message from 'element-ui/lib/message.js';
 import 'element-ui/lib/theme-chalk/message.css';
 import 'element-ui/lib/theme-chalk/icon.css';
+
+import {
+    AxiosRequestConfig,
+    AxiosResponse
+} from 'axios';
 
 /**
  * 显示错误提示
  * 
- * @param {string} message 
- * @param {string} errorCode 
- * @param {string} tip 
+ * @param message 
+ * @param errorCode 
+ * @param tip 
  */
-function showErrorTip(message, errorCode, tip) {
+function showErrorTip(message: string = '', errorCode: string = '', tip: string = '') {
     Message({
         dangerouslyUseHTMLString: true,
         message: `${message}<span title="${tip}" style="cursor:help;font-size:12px;color:#aaa;">(错误码:${errorCode})</span>`,
@@ -34,25 +39,25 @@ function showErrorTip(message, errorCode, tip) {
  * - 请求出错时给予用户错误提示
  */
 class HttpClient extends StandardHttpClient {
-    constructor(config) {
+    constructor(config: AxiosRequestConfig = {}) {
         super(config);
     }
 
-    beforeSend(config) {
+    beforeSend(config: AxiosRequestConfig) {
         NProgress.start();
     }
 
-    afterSend(responseOrError) {
+    afterSend(responseOrError: AxiosResponse | RequestError) {
         NProgress.done();
     }
 
-    handleError(error) {
+    handleError(error: RequestError) {
         if (error._errorType === 'A') {
-            showErrorTip(error._desc, error._errorCode, error.message + ' ' + error.config.url);
+            showErrorTip(error._desc, error._errorCode, error.message + ' ' + error.config?.url);
         } else if (error._errorType === 'H') {
-            showErrorTip(error._desc, error._errorCode, error.config.url);
+            showErrorTip(error._desc, error._errorCode, error.config?.url);
         } else if (error._errorType === 'B') {
-            showErrorTip(error.message, error._errorCode, error.config.url);
+            showErrorTip(error.message, error._errorCode, error.config?.url);
         } else if (error._errorType === 'C') {
             showErrorTip(error._desc, error._errorCode, error.message);
         } else {
