@@ -1,5 +1,9 @@
 # CHANGELOG
 
+* v1.1.0 2021-9-22
+
+  * feat: 升级 `standard-http-client@1.1.0`
+
 * v1.0.0 2021-9-17
 
   * feat: 升级 `standard-http-client@1.0.0`
